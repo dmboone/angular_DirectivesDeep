@@ -30,7 +30,8 @@
         </div>
       </ul>
       <p appBasicHighlight>Style me with basic directive!</p>
-      <p appBetterHighlight>Style me with a better directive!</p>
+      <!-- in the line below we binded the higlight color to the alias appBetterHighlight this time -->
+      <p [appBetterHighlight]="'red'" [defaultColor]="'yellow'">Style me with a better directive!</p> <!-- now we can bind to directive properties from the parent-->
       <!-- <ng-template [ngIf]="onlyOdd">
         <p>Only odd</p>
       </ng-template> -->
