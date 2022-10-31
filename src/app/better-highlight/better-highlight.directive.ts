@@ -3,12 +3,14 @@
 // always use the Renderer for any DOM manipulations
 // make sure to import inside app.module!
 
-import { Directive, OnInit, Renderer2, ElementRef, Host, HostListener } from '@angular/core';
+import { Directive, OnInit, Renderer2, ElementRef, HostListener, HostBinding } from '@angular/core';
 
 @Directive({
   selector: '[appBetterHighlight]'
 })
 export class BetterHighlightDirective implements OnInit{
+  // @HostBinding decorator takes in the host property name we want to change
+  @HostBinding('style.backgroundColor') backgroundColor: string = 'transparent'; // must also include initial value, which we set to transparent
 
   constructor(private elRef: ElementRef, private renderer: Renderer2) { }
 
@@ -23,10 +25,12 @@ export class BetterHighlightDirective implements OnInit{
 
   // added the HostListener decorator to our method named mouseenter
   @HostListener('mouseenter') mouseenter(eventData: Event){ // triggered during mouseenter event; we can grab the eventData but we don't use it in this method
-    this.renderer.setStyle(this.elRef.nativeElement, 'background-color', 'blue'); 
+    // this.renderer.setStyle(this.elRef.nativeElement, 'background-color', 'blue');
+    this.backgroundColor = 'blue'; // this is using HostBinding
   }
 
   @HostListener('mouseleave') mouseleave(eventData: Event){ // triggered during mouseleave event
-    this.renderer.setStyle(this.elRef.nativeElement, 'background-color', 'transparent'); 
+    // this.renderer.setStyle(this.elRef.nativeElement, 'background-color', 'transparent');
+    this.backgroundColor = 'transparent'; // this is using HostBinding
   }
 }
